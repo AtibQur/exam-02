@@ -1,58 +1,43 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   union.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hqureshi <hqureshi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/03 13:37:57 by hqureshi          #+#    #+#             */
+/*   Updated: 2022/04/03 13:38:12 by hqureshi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <unistd.h>
 
-void    ft_putchar(char c)
+int	main(int argc, char **argv)
 {
-    write(1, &c, 1);
-}
+	int	used[255];
+	int	i, j;
 
-int     main(int ac, char **argv)
-{
-    int i;
-    int j;
-
-    if (ac == 3)
-    {
+	if (argc == 3)
+	{
 		i = 0;
-		while (argv[1][i])
+		while (i < 255)
+			used[i++] = 0;
+		i = 1;
+		while (i < 3)
 		{
 			j = 0;
-			while (j < i)
+			while (argv[i][j])
 			{
-				if (argv[1][i] == argv[1][j])
-					break ;
+				if (!used[(unsigned char)argv[i][j]])
+				{
+					used[(unsigned char)argv[i][j]] = 1;
+					write(1, &argv[i][j], 1);
+				}
 				j++;
-				if (i == j)
-					ft_putchar(argv[1][i]);
 			}
 			i++;
 		}
-        i = 0;
-        while(argv[2][i])
-        {
-            j = 0;
-            while(argv[1][j])
-            {
-                if (argv[1][j] == argv[2][i])
-                    break;
-                j++;
-            }
-            if (argv[1][j] != '\0')
-            {
-                i++;
-                continue;
-            }
-            j = 0;
-            while (j < i)
-            {
-                if (argv[2][i] == argv[2][j])
-                    break;
-                j++;
-            }
-            if (i == j)
-                ft_putchar(argv[2][i]);
-            i++;
-        }
-    }
-    ft_putchar('\n');
-    return (0);
+	}
+	write(1, "\n", 1);
+	return (0);
 }
