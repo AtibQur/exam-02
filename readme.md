@@ -1,4 +1,4 @@
-# <h1 align="center">EXAM_02 ✍🏼️🎓</h1>
+# <h1 align="center">EXAMS ✍🏼️🎓</h1>
 <p><img align="right" src="./img/score.png" alt="Score" width="125" height="125"></p>
 
 <h2> Description exam_02</h2>
