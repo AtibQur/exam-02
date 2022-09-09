@@ -10,89 +10,79 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-int whitespaces(char s)
-{
-    return (s == 32 || s == 9 || s == 10 || s == 11)
+#include <stdlib.h>
+#include <stdbool.h>
 
-}
-static int  ft_strlen(char *s)
+bool	ft_is_whitespace(char c)
 {
-    int i = 0;
-    while (s[i])
-        i++;
-    return (i);
+	return (c == ' ' || c == '\t' || c == '\v' || c == '\f'
+			|| c == '\n' || c == '\r');
 }
-static  int ft_count(char *str, char c)
+
+int		ft_split_count_word(char *str)
 {
-    int i;
-    int count;
-    int word;
-    i = 0;
-    count = 0;
-    word = 0;
-    while (str[i] == c && str[i])
-        i++;
-    while (str[i])
-    {
-        if (str[i] != c && str[i])
-            word = 1;
-        if (str[i] == c)
-        {
-            while (str[i] == c && str[i])
-                i++;
-            if (str[i])
-                count++;
-        }
-        else
-            i++;
-    }
-    return (count + word);
+	int		index;
+	int		count;
+
+	index = 0;
+	count = 0;
+	while (str[index])
+	{
+		while (ft_is_whitespace(str[index]))
+			index++;
+		if (str[index] == '\0')
+			break ;
+		while (!ft_is_whitespace(str[index]) && str[index] != '\0')
+			index++;
+		count++;
+	}
+	return (count);
 }
-static char *ft_cpy(char *str, char chr)
+
+char	*ft_str_n_duplicate(char *str, int n)
 {
-    int     i;
-    char    *array;
-    i = 0;
-    array = 0;
-    while (str[i] == chr)
-        i++;
-    while (str[i] && str[i] != chr)
-        i++;
-    array = (char *)malloc(sizeof(char) * (i + 1));
-    if (!array)
-        return (0);
-    i = 0;
-    while (str[i] && str[i] != chr)
-    {
-        array[i] = str[i];
-        i++;
-    }
-    array[i] = '\0';
-    return (array);
+	int		index;
+	char	*duplicate;
+
+	if (!(duplicate = (char *)malloc((n + 1) * sizeof(char))))
+		return (NULL);
+	index = 0;
+	while (str[index] && index < n)
+	{
+		duplicate[index] = str[index];
+		index++;
+	}
+	while (index < n + 1)
+	{
+		duplicate[index] = '\0';
+		index++;
+	}
+	return (duplicate);
 }
-char    **ft_split(char const *s, char c)
+
+char	**ft_split(char *str)
 {
-    int     i;
-    int     j;
-    int     strings;
-    char    **arr;
-    i = 0;
-    j = 0;
-    if (!s)
-        return (0);
-    strings = ft_count((char *)s, c);
-    arr = malloc(sizeof(char *) * (strings + 1));
-    if (!arr)
-        return (0);
-    while (i < strings)
-    {
-        while (s[0] == c)
-            s++;
-        arr[j] = ft_cpy((char *)s, c);
-        j++;
-        s = s + f_strlen(arr[i]);
-        i++;
-    }
-    arr[i] = NULL;
-    return (arr);
+	int		index;
+	int		words;
+	char	*start;
+	char	**array;
+
+	index = 0;
+	words = ft_split_count_word(str);
+	if (!(array = (char **)malloc((words + 1) * sizeof(char *))))
+		return (NULL);
+	while (index < words)
+	{
+		while (ft_is_whitespace(*str))
+			str++;
+		if (*str == '\0')
+			break ;
+		start = str;
+		while (!ft_is_whitespace(*str) && *str != '\0')
+			str++;
+		array[index] = ft_str_n_duplicate(start, str - start);
+		index++;
+	}
+	array[index] = 0;
+	return (array);
 }
