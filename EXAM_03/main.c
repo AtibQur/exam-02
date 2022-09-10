@@ -1,5 +1,6 @@
 #include <stdio.h>
-#include "ft_split.c"
+//#include "ft_split.c"
+#include "test.c"
 
 int main(void)
 {
@@ -8,7 +9,7 @@ int main(void)
 	int		i;
 
 	i = 0;
-	arr = "If there are no spaces, than everything's fine!";
+	arr = "If there are 	\n \t \vno spaces, than everything's fine!";
 	test = ft_split(arr);
 	while (test[i])
 	{

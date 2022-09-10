@@ -13,76 +13,75 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-bool	ft_is_whitespace(char c)
+bool    ft_is_whitespace(char c)
 {
-	return (c == ' ' || c == '\t' || c == '\v' || c == '\f'
-			|| c == '\n' || c == '\r');
+    return (c == ' ' || c == '\t' || c == '\v' || c == '\f' || c == '\n' || c == '\r');
 }
 
-int		ft_split_count_word(char *str)
+int ft_split_count_word(char *str)
 {
-	int		index;
-	int		count;
+    int i;
+    int count;
 
-	index = 0;
-	count = 0;
-	while (str[index])
-	{
-		while (ft_is_whitespace(str[index]))
-			index++;
-		if (str[index] == '\0')
-			break ;
-		while (!ft_is_whitespace(str[index]) && str[index] != '\0')
-			index++;
-		count++;
-	}
-	return (count);
+    i = 0;
+    count = 0;
+    while (str[i])
+    {
+        while (ft_is_whitespace(str[i]))
+            i++;
+        if (str[i] == '\0')
+            break ;
+        while (!ft_is_whitespace(str[i]) && str[i] != '\0')
+            i++;
+        count++;
+    }
+    return (count);
 }
 
-char	*ft_str_n_duplicate(char *str, int n)
+char    *ft_str_n_dup(char *str, int n)
 {
-	int		index;
-	char	*duplicate;
+    int     i;
+    char    *dup;
 
-	if (!(duplicate = (char *)malloc((n + 1) * sizeof(char))))
-		return (NULL);
-	index = 0;
-	while (str[index] && index < n)
-	{
-		duplicate[index] = str[index];
-		index++;
-	}
-	while (index < n + 1)
-	{
-		duplicate[index] = '\0';
-		index++;
-	}
-	return (duplicate);
+    if (!(dup = (char *)malloc((n + 1) * sizeof(char))))
+        return (NULL);
+    i = 0;
+    while (str[i] && i < n)
+    {
+        dup[i] = str[i];
+        i++;
+    }
+    while (i < n + 1)
+    {
+        dup[i] = '\0';
+        i++;
+    }
+    return (dup);
 }
 
-char	**ft_split(char *str)
+char    **ft_split(char *str)
 {
-	int		index;
-	int		words;
-	char	*start;
-	char	**array;
+    int i;
+    int words;
+    char    *start;
+    char    **arr;
 
-	index = 0;
-	words = ft_split_count_word(str);
-	if (!(array = (char **)malloc((words + 1) * sizeof(char *))))
-		return (NULL);
-	while (index < words)
-	{
-		while (ft_is_whitespace(*str))
-			str++;
-		if (*str == '\0')
-			break ;
-		start = str;
-		while (!ft_is_whitespace(*str) && *str != '\0')
-			str++;
-		array[index] = ft_str_n_duplicate(start, str - start);
-		index++;
-	}
-	array[index] = 0;
-	return (array);
+    i = 0;
+    words = ft_split_count_word(str);
+    if (!(arr = (char **)malloc((words + 1) * sizeof(char *) )))
+        return (NULL);
+    while (i < words)
+    {
+        while (ft_is_whitespace(*str))
+            str++;
+        if (*str == '\0')
+            break ;
+        start = str;
+        while (!ft_is_whitespace(*str) && *str != '\0')
+            str++;
+        arr[i] = ft_str_n_dup(start, str - start);
+        i++;
+    }
+    arr[i] = 0;
+    return (arr);
 }
