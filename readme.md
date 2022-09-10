@@ -1,11 +1,11 @@
 # <h1 align="center">EXAMS ✍🏼️🎓</h1>
-<p><img align="right" src="./img/score.png" alt="Score" width="125" height="125"></p>
+<p><img align="right" src="./EXAM_02/img/score.png" alt="Score" width="125" height="125"></p>
 
 <h2> Description exam_02</h2>
 <p>In exam_02 you will be tested for 1 of the following excersises and projects:
 <li>Union</li>          
 <li>Inter</li>
----------------------
+---------------------------------------------
 <li>Ft_printf</li>
 <li>Get_next_line</li>
 </p>
