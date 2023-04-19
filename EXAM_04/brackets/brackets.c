@@ -1,85 +1,76 @@
 #include <unistd.h>
 
-int open_b(char c)
-{
-	if (c == 40 || c == 91 || c == 123)
-		return (1);
-	return (0);
-}
-
-int	closing_b(char c)
-{
-	if (c == 41 || c == 93 || c == 125)
-		return (1);
-	return (0);
-}
-
-int which_close(char c)
-{
-	if (c == 40)
-		return (41);
-	if (c == 91)
-		return (93);
-	if (c == 123)
-		return (125);
-	return (0);
-}
-
-int	start_loop(char *str, int *i)
-{
-	int b_close = which_close(str[*i]);
-	int b_open = str[*i];
-	int count = 0;
-	while (str[*i])
-	{
-		if (str[*i] == b_open)
-			count++;
-		if (str[*i] == b_close)
-		{
-			count--;
-			if (count == 0)
-				return (1);
-		}
-		(*i)++;
-	}
-	return (0);
-}
-
-int	check_brackets(char *str)
+int		ft_strlen(char *str)
 {
 	int i = 0;
 	while (str[i])
-	{
-		if (closing_b(str[i]))
-			return (0);
-		if (open_b(str[i]))
-		{
-			int res = start_loop(str, &i);
-			if (res == 0)
-				return (0);
-		}
 		i++;
+	return (i);
+}
+
+void	ft_putstr(char *str)
+{
+	write(1, str, ft_strlen(str));
+}
+
+void	brackets(char *str)
+{
+	int	round = 0;
+	int	square = 0;
+	int	curvy = 0;
+
+	int	len = ft_strlen(str);
+	char	next[len + 1];
+	int		i = 0;
+
+	while (*str)
+	{
+		if (*str == '(')
+			round++;
+		if (*str == '[')
+			square++;
+		if (*str == '{')
+			curvy++;
+		if (*str == '(' || *str == '[' || *str == '{')
+		{
+			i++;
+			next[i] = *str;
+		}
+
+		if ((*str == ')' && round == 0) ||
+				(*str == ']' && square == 0) ||
+				(*str == '}' && curvy == 0))
+		{
+			ft_putstr("Error\n");
+			return ;
+		}
+		
+		if (*str == ')' && next[i] == '(')
+			round--;
+		if (*str == ']' && next[i] == '[')
+			square--;
+		if (*str == '}' && next[i] == '{')
+			curvy--;
+		if (*str == ')' || *str == ']' || *str == '}')
+			i--;
+		str++;
 	}
-	return (1);
+	
+	if (round == 0 && square == 0 && curvy == 0)
+		ft_putstr("OK\n");
+	else
+		ft_putstr("Error\n");
 }
 
 int	main(int argc, char **argv)
 {
-	if (argc == 1)
+	if (argc > 1)
 	{
-		write(1, "\n", 2);
-		return (0);
+		for (int i = 1; i < argc; i++)
+			brackets(argv[i]);
 	}
-	int i = 1;
-	while (i < argc)
-	{
-		int res = check_brackets(argv[i]);
-		if (res == 0)
-			write(1, "Error\n", 6);
-		else
-			write(1, "OK\n", 3);
-		i++;
-	}
+	else
+		ft_putstr("\n");
 	return (0);
 }
 
