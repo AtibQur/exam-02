@@ -3,24 +3,24 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-struct node
+struct NodeInsert
 {
     int key;
-    struct node *left;
-    struct node *right;
+    struct NodeInsert *left;
+    struct NodeInsert *right;
 };
 
-struct node *getNewNode(int val)
+struct NodeInsert *getNewNodeInsert(int val)
 {
-    struct node *newNode = malloc(sizeof(struct node));
-    newNode->key   = val;
-    newNode->left  = NULL;
-    newNode->right = NULL;
+    struct NodeInsert *newNodeInsert = malloc(sizeof(struct NodeInsert));
+    newNodeInsert->key   = val;
+    newNodeInsert->left  = NULL;
+    newNodeInsert->right = NULL;
 
-    return newNode;
+    return newNodeInsert;
 }
 
-struct node *insert(struct node *root, int val)
+struct NodeInsert *insert(struct NodeInsert *root, int val)
 {
     if(root == NULL)
         return getNewNode(val);
@@ -34,18 +34,19 @@ struct node *insert(struct node *root, int val)
 //=========================================================//
 struct Node {
     int data;
-    struct Node *left, *right;
+    struct Node *left; 
+    struct Node *right;
 };
 
-bool ifNodeExists(struct Node* node, int key)
+bool ifNodeExists(struct Node* Node, int key)
 {
-    if (node == NULL)
+    if (Node == NULL)
         return false;
-    if (node->data == key)
+    if (Node->data == key)
         return true;
-    bool res1 = ifNodeExists(node->left, key);
+    bool res1 = ifNodeExists(Node->left, key);
     if (res1)
         return true;
-    bool res2 = ifNodeExists(node->right, key);
+    bool res2 = ifNodeExists(Node->right, key);
     return res2;
 }
