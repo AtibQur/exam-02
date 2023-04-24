@@ -37,9 +37,7 @@ void	brackets(char *str)
 			next[i] = *str;
 		}
 
-		if ((*str == ')' && round == 0) ||
-				(*str == ']' && square == 0) ||
-				(*str == '}' && curvy == 0))
+		if ((*str == ')' && round == 0) || (*str == ']' && square == 0) || (*str == '}' && curvy == 0))
 		{
 			ft_putstr("Error\n");
 			return ;
