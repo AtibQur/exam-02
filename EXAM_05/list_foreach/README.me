@@ -1,0 +1,19 @@
+Expected files   : ft_list_foreach.c, ft_list.h
+
+write a function that takes a list and a function pointer, and applies this function to each element of the list.
+
+it must be declared as follows:
+
+void ft_list_foreach(t_list *begin_list, void(*f)(void *));
+
+the function pointed to by f will be used as follows:
+
+(*f)(list_ptr->data);
+
+you must use the following structure:
+
+typedef struct s_list
+{
+    struct s_list *next;
+    void          *data;
+}               t_list;
