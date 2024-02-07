@@ -33,5 +33,6 @@ the second test will be one of the following:
 <p>Project brackets and Binary search within this repository are tested and work (21-05-2023)</p>
 
 <h2>Description exam_05</h2>
-soontm.
+<p><img align="right" src="./EXAM_05/img/score.png" alt="Score" width="125" height="125"></p>
+In exam 05 you will have to pass 3 tests. They can be different than the ones in this repository. Every test works, in the multiplication test, you still have to deal with negative numbers.
 </p>
