@@ -1,44 +1,33 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// Function to print the prime factors of a positive integer
-void print_prime_factors(int n)
-{
+void prime_nums(int n) {
     int i = 2;
-    while (i * i <= n) 
-    {
-        if (n % i != 0) 
+
+    while (i * i <= n) {
+        if (n % i != 0)
             i++;
-        else 
-        {
+        else {
             n /= i;
             printf("%d*", i);
         }
     }
-    if (n > 1) 
-        printf("%d", n); // Print the last factor without an asterisk
+    printf("%d", n);
 }
 
-int main(int argc, char *argv[])
-{
-    if (argc != 2)
-    {
-        printf("Usage: %s <positive integer>\n", argv[0]);
+int main(int argc, char **argv) {
+    if (argc != 2) {
         return 1;
     }
-    int n = atoi(argv[1]); // Convert argument from string to integer
+    
+    int n = atoi(argv[1]);
     if (n == 1)
     {
-        printf("1\n");
+        printf("1");
         return 0;
     }
-
-    print_prime_factors(n);
-    printf("\n"); // Print a newline after the factors
+    prime_nums(n);
+    printf("\n");
 
     return 0;
 }
-
-/*
-gcc fprime.c -o fprime
-*/
