@@ -33,6 +33,20 @@ bool get_size(char map[BUFFERSIZE], int *cols) {
     return true;
 }
 
+void print_num(int num)
+{
+    char nb[2049];
+    int index = 0;
+    while (num != 0)
+    {
+        nb[index++] = num % 10 + '0';
+        num = num / 10;
+    }
+    for (int i = index - 1; i >= 0; i--)
+        write(1, &nb[i], 1);
+    write(1, "\n", 1);
+}
+
 void find_largest_island(char *file) {
     int fd, size, cols = 0;
     char map[BUFFERSIZE] = {0};
@@ -55,7 +69,7 @@ void find_largest_island(char *file) {
         }
     }
 
-    write(1, map, size);
+    print_num(maxIslandSize);
 }
 
 int main(int argc, char *argv[]) {
